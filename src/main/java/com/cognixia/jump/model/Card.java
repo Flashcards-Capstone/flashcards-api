@@ -10,10 +10,10 @@ import javax.persistence.Id;
 public class Card {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	
 	@Column(nullable = false)
-	private int stackId;
+	private Integer stackId;
 	
 	@Column(nullable = false)
 	private String questions;
@@ -25,7 +25,7 @@ public class Card {
 		this(-1, -1, "N/A","N/A");
 	}
 	
-	public Card(int id, int stackId, String questions, String answer) {
+	public Card(Integer id, Integer stackId, String questions, String answer) {
 		super();
 		this.id = id;
 		this.stackId = stackId;
@@ -33,19 +33,19 @@ public class Card {
 		this.answer = answer;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public int getStackId() {
+	public Integer getStackId() {
 		return stackId;
 	}
 
-	public void setStackId(int stackId) {
+	public void setStackId(Integer stackId) {
 		this.stackId = stackId;
 	}
 

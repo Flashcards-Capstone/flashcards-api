@@ -45,7 +45,7 @@ public class Stack {
 		this.subject = subject;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 

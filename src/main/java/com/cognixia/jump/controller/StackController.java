@@ -22,7 +22,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.cognixia.jump.exception.ResourceNotFoundException;
 
 import com.cognixia.jump.model.Stack;
-import com.cognixia.jump.model.Student;
 import com.cognixia.jump.repository.StackRepository;
 
 @RestController
@@ -83,7 +82,7 @@ public class StackController {
 		}
 		
 		// make sure no id is passed for address and it is auto incremented
-		stack.getTitle().setId(null);
+		//stack.getTitle().setId(null);
 		//student.getAddress().setId(null);
 
 		Stack created = repo.save(stack);
