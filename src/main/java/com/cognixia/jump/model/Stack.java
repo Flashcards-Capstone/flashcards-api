@@ -15,13 +15,13 @@ import javax.persistence.OneToMany;
 public class Stack {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	
 	@OneToMany(mappedBy = "stack", cascade = CascadeType.ALL)
     private List<Card> listCard = new ArrayList<>();
 	
 	@Column(nullable = false)
-	private int userId;
+	private Integer userId;
 	
 	@Column(nullable = false)
 	private boolean publiclyVisible;
@@ -36,7 +36,7 @@ public class Stack {
 		this(-1, -1, false,"N/A","N/A");
 	}
 	
-	public Stack(int id, int userId, boolean publiclyVisible, String title, String subject) {
+	public Stack(Integer id, Integer userId, boolean publiclyVisible, String title, String subject) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -49,7 +49,7 @@ public class Stack {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -57,7 +57,7 @@ public class Stack {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 
