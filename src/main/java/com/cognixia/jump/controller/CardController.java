@@ -54,7 +54,7 @@ public class CardController {
 			return ResponseEntity.status(400).body("Card must belong to a stack");
 		}
 		
-		if(card.getQuestions() == null) {
+		if(card.getQuestion() == null) {
 			return ResponseEntity.status(400).body("Card must have a question");
 
 		}

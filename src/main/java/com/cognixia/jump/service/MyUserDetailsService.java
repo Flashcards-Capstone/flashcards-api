@@ -19,8 +19,16 @@ public class MyUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Optional<User> userFound = repo.findByUsername(username);
+		
+		// if username doesn't exist in the table, throw an exception
+		if(userFound.isEmpty()) {
+			throw new UsernameNotFoundException(username);
+		}
+		
+		// as long as we found the user, create a user details object with all the relevant info for security 
+		// security will take this object and perform authorization & authentication
+		return new MyUserDetails( userFound.get() );
 	}
-
 }

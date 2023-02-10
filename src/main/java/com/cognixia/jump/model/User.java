@@ -32,8 +32,10 @@ public class User {
 		STUDENT, TEACHER
 	}
 	
+	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Stack> listStack = new ArrayList<>();
+	
 	
 	@Enumerated(EnumType.STRING)
 	private Role role;

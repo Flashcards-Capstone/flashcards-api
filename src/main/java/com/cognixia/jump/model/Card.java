@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity	
 public class Card {
@@ -12,24 +14,30 @@ public class Card {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(nullable = false)
-	private Integer stackId;
+	@Column(nullable = false, insertable=false, updatable=false)
+	private Integer stack_id;
 	
 	@Column(nullable = false)
-	private String questions;
+	private String question;
 	
 	@Column(nullable = false)
 	private String answer;
+	
+	
+	@ManyToOne
+	@JoinColumn( name = "stack_id", referencedColumnName = "id", nullable = false  )
+	private Stack stack;
+	
 	
 	public Card() {
 		this(-1, -1, "N/A","N/A");
 	}
 	
-	public Card(Integer id, Integer stackId, String questions, String answer) {
+	public Card(Integer id, Integer stack_id, String question, String answer) {
 		super();
 		this.id = id;
-		this.stackId = stackId;
-		this.questions = questions;
+		this.stack_id = stack_id;
+		this.question = question;
 		this.answer = answer;
 	}
 
@@ -42,19 +50,19 @@ public class Card {
 	}
 
 	public Integer getStackId() {
-		return stackId;
+		return stack_id;
 	}
 
-	public void setStackId(Integer stackId) {
-		this.stackId = stackId;
+	public void setStackId(Integer stack_id) {
+		this.stack_id = stack_id;
 	}
 
-	public String getQuestions() {
-		return questions;
+	public String getQuestion() {
+		return question;
 	}
 
-	public void setQuestions(String questions) {
-		this.questions = questions;
+	public void setQuestion(String question) {
+		this.question = question;
 	}
 
 	public String getAnswer() {
