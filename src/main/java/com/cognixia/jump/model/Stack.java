@@ -1,5 +1,6 @@
 package com.cognixia.jump.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,20 +10,34 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 	
+//import com.cognixia.jump.model.Card;
+
 @Entity
-public class Stack {
+public class Stack implements Serializable{
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@JsonProperty(access = Access.WRITE_ONLY)
 	@OneToMany(mappedBy = "stack", cascade = CascadeType.ALL)
     private List<Card> listCard = new ArrayList<>();
 	
-	@Column(nullable = false)
-	private Integer userId;
+	@ManyToOne
+	@JoinColumn(name = "user_id", referencedColumnName = "id", nullable=false)
+	private User user;
 	
+	
+	@Column(nullable = false, insertable=false, updatable=false)
+	private Integer user_id;
 	@Column(nullable = false)
 	private boolean publiclyVisible;
 	
@@ -36,10 +51,10 @@ public class Stack {
 		this(-1, -1, false,"N/A","N/A");
 	}
 	
-	public Stack(Integer id, Integer userId, boolean publiclyVisible, String title, String subject) {
+	public Stack(Integer id, Integer user_id, boolean publiclyVisible, String title, String subject) {
 		super();
 		this.id = id;
-		this.userId = userId;
+		this.user_id = user_id;
 		this.publiclyVisible = publiclyVisible;
 		this.title = title;
 		this.subject = subject;
@@ -54,11 +69,11 @@ public class Stack {
 	}
 
 	public int getUserId() {
-		return userId;
+		return user_id;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setUserId(Integer user_id) {
+		this.user_id = user_id;
 	}
 
 	public boolean isPubliclyVisible() {
