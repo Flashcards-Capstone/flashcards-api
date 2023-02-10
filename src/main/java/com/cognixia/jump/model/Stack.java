@@ -17,7 +17,6 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 	
-//import com.cognixia.jump.model.Card;
 
 @Entity
 public class Stack implements Serializable{
@@ -38,7 +37,7 @@ public class Stack implements Serializable{
 	
 	@Column(nullable = false, insertable=false, updatable=false)
 	private Integer user_id;
-	@Column(nullable = false)
+	@Column(columnDefinition = "boolean default false")
 	private boolean publiclyVisible;
 	
 	@Column(nullable = false)
