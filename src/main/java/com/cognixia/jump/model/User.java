@@ -17,7 +17,7 @@ import javax.persistence.OneToMany;
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	
 	@Column(nullable = false)
 	private String username;
@@ -29,7 +29,7 @@ public class User {
 	private String email;
 	
 	public static enum Role {
-		STUDENT, TEACHER
+		ROLE_STUDENT, ROLE_TEACHER
 	}
 	
 	
@@ -44,7 +44,7 @@ public class User {
 		this(-1, "N/A", "N/A","N/A","N/A");
 	}
 	
-	public User(int id, String username, String password, String email, String role) {
+	public User(Integer id, String username, String password, String email, String role) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -52,11 +52,11 @@ public class User {
 		this.email = email;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

@@ -31,12 +31,17 @@ public class AuthenticationController {
 	
 	// create the token at http://localhost:8080/authenticate 
 	// send the username & password and try to generate a token as a response
+	
 	@PostMapping("/authenticate")
 	public ResponseEntity<?> createJwtToken(@RequestBody AuthenticationRequest request) throws Exception {
-		
 		// try to catch the exception for bad credentials, just so we can set our own
 		// message when this doesn't work
+		
+		System.out.println("user " + request.getUsername());
+		System.out.println("password " + request.getPassword());
+
 		try {
+
 			// make sure we have a valid user by checking their username and password
 			authenticationManager.authenticate(
 					new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
@@ -47,6 +52,8 @@ public class AuthenticationController {
 		}
 
 		// as long as no exception was thrown, user is valid
+
+		
 
 		// load in the user details for that user
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
