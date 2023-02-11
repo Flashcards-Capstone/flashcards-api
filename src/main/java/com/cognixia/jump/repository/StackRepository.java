@@ -14,6 +14,10 @@ import com.cognixia.jump.model.Stack;
 
 @Repository
 public interface StackRepository extends JpaRepository<Stack, Integer>{
+
+//	@Query("select s from Stack s where s.user_id = ?1")
+//	public List<Stack> stacksWithSameUserId(Integer user_id);
+	
 	@Query("select s from Stack s where s.subject = ?1")
 	public List<Stack> stacksInSameSubject(String subject);
 	
