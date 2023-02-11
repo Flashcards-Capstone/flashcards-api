@@ -23,6 +23,7 @@ public class UserController {
 	@Autowired
 	UserRepository repo;
 	
+
 	@Autowired
 	PasswordEncoder encoder;
 
