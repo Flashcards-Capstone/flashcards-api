@@ -17,13 +17,15 @@ public class MyUserDetails implements UserDetails{
 	
 	private String username;
 	private String password;
-	private boolean enabled;
+	//private boolean enabled;
 	private List<GrantedAuthority> authorities;
 	
 	// when a new object created, will extract only the RELEVANT info from our User object
 		public MyUserDetails(User user) {
 		this.username = user.getUsername();
 		this.password = user.getPassword();
+		
+		
 		
 		// Granted Authority -> permissions/grants a user has access to retrieve or operations to perform
 		// GA is given based on the user's roles
@@ -69,6 +71,6 @@ public class MyUserDetails implements UserDetails{
 
 		@Override
 		public boolean isEnabled() {
-			return enabled;
+			return true;
 		}
 }
