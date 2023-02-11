@@ -1,5 +1,6 @@
 package com.cognixia.jump.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,15 @@ public class UserController {
 
 	@Autowired
 	UserRepository repo;
+	
+	@GetMapping("/hello")
+	public String getHello() {
+		return "Hello World!!";
+	}
+//	public List<User> getUsers() {
+//		
+//		return repo.findAll();
+//	}
 
 	@GetMapping("/user/{id}")
 	public ResponseEntity<?> getUserById(@PathVariable int id) {

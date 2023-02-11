@@ -40,6 +40,7 @@ public class SecurityConfiguration {
 		http.csrf().disable()
 			.authorizeRequests()
 			.antMatchers("/authenticate").permitAll()
+			//.antMatchers("/api/hello").permitAll()
 			.antMatchers("/api/v1/user").permitAll()
 			.antMatchers("/api/v1/stack").hasRole("TEACHER")
 			.antMatchers("/api/v1/stack/user_id").permitAll()
