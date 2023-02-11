@@ -21,6 +21,7 @@ public class StackService {
 	}
 	
 	
+	
 	public Optional<Stack> updateVisible(int id, Boolean publiclyVisible){
 		int count = repo.updateVisibility(id, publiclyVisible);
 		if(count > 0) {

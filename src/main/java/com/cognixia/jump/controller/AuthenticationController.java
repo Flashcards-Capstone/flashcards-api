@@ -37,8 +37,6 @@ public class AuthenticationController {
 		// try to catch the exception for bad credentials, just so we can set our own
 		// message when this doesn't work
 		
-		System.out.println("user " + request.getUsername());
-		System.out.println("password " + request.getPassword());
 
 		try {
 

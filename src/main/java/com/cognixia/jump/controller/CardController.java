@@ -50,18 +50,18 @@ public class CardController {
 		card.setId(null);
 		
 		// make sure each student created has an address, if not checked, will end up with 500 error
-		if(card.getStackId() == null) {
-			return ResponseEntity.status(400).body("Card must belong to a stack");
-		}
-		
-		if(card.getQuestion() == null) {
-			return ResponseEntity.status(400).body("Card must have a question");
-
-		}
-		if(card.getAnswer() == null) {
-			return ResponseEntity.status(400).body("Card must have an answer");
-
-		}
+//		if(card.getStackId() == null) {
+//			return ResponseEntity.status(400).body("Card must belong to a stack");
+//		}
+//		
+//		if(card.getQuestion() == null) {
+//			return ResponseEntity.status(400).body("Card must have a question");
+//
+//		}
+//		if(card.getAnswer() == null) {
+//			return ResponseEntity.status(400).body("Card must have an answer");
+//
+//		}
 		
 
 

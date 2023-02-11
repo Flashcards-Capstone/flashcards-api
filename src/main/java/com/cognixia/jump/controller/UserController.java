@@ -49,11 +49,13 @@ public class UserController {
 		user.setId(null);
 
 		user.setPassword(encoder.encode(user.getPassword()));
+		
+		//user.setNewStacks(); 
 
 		User created = repo.save(user);
 
 		return ResponseEntity.status(201).body(created);
 
 	}
-
+		
 }
