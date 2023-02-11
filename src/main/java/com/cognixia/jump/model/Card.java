@@ -34,17 +34,6 @@ public class Card implements Serializable{
 	private Stack stack;
 	
 	
-//	public Card() {
-//		this(-1, -1, "N/A","N/A");
-//	}
-//	
-//	public Card(Integer id, Integer stack_id, String question, String answer) {
-//		super();
-//		this.id = id;
-//		this.stack_id = stack_id;
-//		this.question = question;
-//		this.answer = answer;
-//	}
 	
 	public Card() {
 	}
@@ -57,13 +46,7 @@ public class Card implements Serializable{
 		this.id = id;
 	}
 
-//	public Integer getStackId() {
-//		return stack_id;
-//	}
-//
-//	public void setStackId(Integer stack_id) {
-//		this.stack_id = stack_id;
-//	}
+
 
 	public String getQuestion() {
 		return question;
@@ -85,6 +68,7 @@ public class Card implements Serializable{
 	public void setStack(Stack stack) {
 		this.stack = stack;
 	}
+	
 
 	@Override
 	public String toString() {

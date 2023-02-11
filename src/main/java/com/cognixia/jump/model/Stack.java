@@ -17,76 +17,44 @@ import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
-	
 
 @Entity
-public class Stack implements Serializable{
+public class Stack implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 //	@Column(nullable = false)
 	@NotBlank
 	private String title;
-	
-	//@Column(nullable = false)
+
+	// @Column(nullable = false)
 	@NotBlank
 	private String subject;
-	
+
 	@Column(columnDefinition = "boolean default false")
 	private boolean publiclyVisible;
-	
-	
-	//@JsonProperty(access = Access.WRITE_ONLY)
+
+	// @JsonProperty(access = Access.WRITE_ONLY)
 	@OneToMany(mappedBy = "stack", cascade = CascadeType.ALL)
-    private List<Card> listCard;
-	
-	
+	private List<Card> listCard;
+
 	@ManyToOne
-	@JoinColumn(name = "user_id", referencedColumnName = "id") //nullable = true
+	@JoinColumn(name = "user_id", referencedColumnName = "id") // nullable = true
 	private User user;
-	
-	
-//	@Column(insertable=true, updatable=false)
-//	private Integer user_id;
-	
 
-
-	
-//	public Stack() {
-////		this(-1, -1, false,"N/A","N/A");
-//		this(-1,false,"N/A","N/A");
-//	}
 	public Stack() {
 	}
-//	public Stack(Integer id, Integer user_id, boolean publiclyVisible, String title, String subject) {
-//	public Stack(Integer id, boolean publiclyVisible, String title, String subject) {
-//
-//		super();
-//		this.id = id;
-//		//this.user_id = user_id;
-//		this.publiclyVisible = publiclyVisible;
-//		this.title = title;
-//		this.subject = subject;
-//	}
 
 	public Integer getId() {
 		return id;
 	}
-	
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-//	public int getUserId() {
-//		return user_id;
-//	}
-//
-//	public void setUserId(Integer user_id) {
-//		this.user_id = user_id;
-//	}
 
 	public String getTitle() {
 		return title;
@@ -103,6 +71,7 @@ public class Stack implements Serializable{
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
+
 	public boolean isPubliclyVisible() {
 		return publiclyVisible;
 	}
@@ -111,6 +80,9 @@ public class Stack implements Serializable{
 		this.publiclyVisible = publiclyVisible;
 	}
 
+	public List<Card> getCards() {
+		return listCard;
+	}
 
 	public void setUser(User user) {
 		this.user = user;
@@ -121,5 +93,5 @@ public class Stack implements Serializable{
 		return "Stack [id=" + id + ", listCard=" + listCard + ", user=" + user + ", publiclyVisible=" + publiclyVisible
 				+ ", title=" + title + ", subject=" + subject + "]";
 	}
-	
+
 }

@@ -34,154 +34,109 @@ public class StackController {
 
 	@Autowired
 	StackService service;
-	
+
 	@Autowired
 	StackRepository repo;
-	
+
 	@Autowired
 	UserService us;
-	
+
 	@Autowired
 	UserRepository urepo;
 
-	//for teacher to get all stacks
+	// for teacher to get all stacks
 	@GetMapping("/stack")
 	public List<Stack> getStacks() {
 		return repo.findAll();
 	}
-	
+
 	@GetMapping("/stack/{id}")
 	public ResponseEntity<?> getStacksByStackId(@PathVariable int id) throws ResourceNotFoundException {
-		
+
 		Optional<Stack> found = repo.findById(id);
-		
-		if(found.isEmpty()) {
+
+		if (found.isEmpty()) {
 			throw new ResourceNotFoundException("Stack", id);
 		}
-		
+
 		return ResponseEntity.status(200).body(found.get());
 	}
-	
-//	@GetMapping("/stack/{user_id}")
-//	public List<Stack> getStacksByUserId(@PathVariable int user_id) throws ResourceNotFoundException {
-//		
-//		
-//		List<Stack> stacksByUserId = repo.stacksWithSameUserId(user_id);
-//		
-//		if(stacksByUserId.isEmpty()) {
-//			throw new ResourceNotFoundException("Stack", user_id);
-//		}
-//		
-//		return stacksByUserId;
-//	}
-//	
-	@GetMapping("/stack/subject")
-	public List<Stack> stacksInSameCategory(@RequestParam String subject) {
-		
+
+
+	@GetMapping("/stack/subject/{subject}")
+	public List<Stack> stacksInSameCategory(@PathVariable String subject) {
+
 		return repo.stacksInSameSubject(subject);
 	}
-	
-	
+
 	@PostMapping("/stack")
-	public ResponseEntity<?> newStack(@RequestParam (value= "user_id", required = true) String user_id, @RequestBody Stack stack) throws ResourceNotFoundException {
-		
+	public ResponseEntity<?> newStack(@RequestParam(value = "user_id", required = true) String user_id,
+			@RequestBody Stack stack) throws ResourceNotFoundException {
+
 		User user = new User();
-		
-		
+
 		Optional<User> optionalUser = us.getUserById(Integer.parseInt(user_id));
-		
-		if(optionalUser.isPresent()) {
+
+		if (optionalUser.isPresent()) {
 			user = optionalUser.get();
-		}
-		else {
+		} else {
 			throw new ResourceNotFoundException("user", Integer.parseInt(user_id));
 		}
 		stack.setUser(user);
 
 		Stack created = repo.save(stack);
-		
 
 		user.getStacks().add(created);
-		
-		urepo.save(user);
-		
-		return ResponseEntity.status(201).body(created);		
-		
-		
-	}
-	
-	
-	
-	
-	
-	
-//	@PostMapping("/stack")
-////	public ResponseEntity<?> createStack(@Valid @RequestBody Stack stack) throws ResourceNotFoundException {
-//	public ResponseEntity<?> createStack(@Valid @RequestBody Stack stack){
-//		//stack.setId(null);
-//
-//
-//		Stack created = repo.save(stack);
-//		
-//		
-//		return ResponseEntity.status(201).body(created);
-//	}
-	
-	@PatchMapping("/stack/{id}")
-	//public ResponseEntity<?> updateStack(@PathParam(value = "id") int id, @PathParam(value = "publiclyVisible") Boolean publiclyVisible, @PathParam(value = "title") String title, @PathParam(value = "subject") String subject) {
-	public ResponseEntity<?> updateStack(@RequestParam int id, @RequestParam Boolean publiclyVisible, @RequestParam String title, @RequestParam String subject) {
 
-		if(publiclyVisible != null) {
+		urepo.save(user);
+
+		return ResponseEntity.status(201).body(created);
+
+	}
+
+
+	@PatchMapping("/stack/{id}")
+
+	public ResponseEntity<?> updateStack(@PathVariable Integer id, @RequestParam Boolean publiclyVisible,
+			@RequestParam String title, @RequestParam String subject) throws ResourceNotFoundException {
+
+		if (publiclyVisible != null) {
 			service.updateVisible(id, publiclyVisible);
-			
+
 		}
-		if(title != null) {
+		if (title != null) {
 			service.updateTitle(id, title);
 		}
-		if(subject != null) {
+		if (subject != null) {
 			service.updateSubject(id, subject);
 		}
-		
-//		Optional<Stack> updatedVis = service.updateVisible(id, publiclyVisible);
-//		Optional<Stack> updatedTitle = service.updateTitle(id, title);
-//		Optional<Stack> updatedSubject = service.updateSubject(id, subject);
-		Optional<Stack> updatedStack = service.getStackById(id);
 
-		
-//		if(updatedVis.isEmpty() || updatedTitle.isEmpty() || updatedSubject.isEmpty()) {
-//			return ResponseEntity.status(404)
-//								 .body("Cannot update, can't find stack with id = " + id);
-//		}
-		if(updatedStack.isEmpty()) {
-			return ResponseEntity.status(404)
-								 .body("Cannot update, can't find stack with id = " + id);
-		}
-		else {
-			return ResponseEntity.status(200)
-								 .body(updatedStack.get());
-		}
-		
+
+		Stack stack = repo.findById(id).get();
+
+
+		Stack created = repo.save(stack);
+
+		return ResponseEntity.status(200).body(created);
+
 	}
-	
+
 	@DeleteMapping("/stack/{id}")
 	public ResponseEntity<?> deleteStack(@PathVariable int id) throws ResourceNotFoundException {
-		
+
 		boolean exists = repo.existsById(id);
-		
-		if(exists) {
-			
+
+		if (exists) {
+
 			// will return the student we just deleted in the response
 			Stack deleted = repo.findById(id).get();
-					
+
 			repo.deleteById(id);
-			
+
 			return ResponseEntity.status(200).body(deleted);
 		}
-		
+
 		throw new ResourceNotFoundException("Stack", id);
 	}
-	
-	
-	
-	
+
 }
