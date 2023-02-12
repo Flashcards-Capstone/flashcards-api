@@ -28,7 +28,7 @@ public class UserController {
 	PasswordEncoder encoder;
 
 	@GetMapping("/user")
-	public List<User> getAllStudents() {
+	public List<User> getAllUsers() {
 		return repo.findAll();
 	}
 
