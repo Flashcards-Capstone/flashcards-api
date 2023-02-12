@@ -96,7 +96,7 @@ public class StackServiceTest {
 		boolean vis = true;
 
 
-		when(service.updateVisible(id, vis)).thenReturn(Optional.of(stack));
+		when(repo.updateVisibility(id, vis)).thenReturn(1);
 		when(repo.findById(id)).thenReturn(Optional.of(stack));
 
 		Stack updated = service.updateVisible(id, vis).get();
@@ -115,7 +115,7 @@ public class StackServiceTest {
 		stack.setSubject("Subject");
 		stack.setTitle("title");
 
-		when(service.updateTitle(id, title)).thenReturn(null);
+		when(repo.updateTitle(id, title)).thenReturn(1);
 		when(repo.findById(id)).thenReturn(Optional.of(stack));
 
 		Stack updated = service.updateTitle(id, title).get();
@@ -132,7 +132,7 @@ public class StackServiceTest {
 		stack.setSubject("Subject");
 		stack.setTitle("title");
 
-		when(service.updateSubject(id, subject)).thenReturn(null);
+		when(repo.updateSubject(id, subject)).thenReturn(1);
 		when(repo.findById(id)).thenReturn(Optional.of(stack));
 
 		Stack updated = service.updateSubject(id, subject).get();
