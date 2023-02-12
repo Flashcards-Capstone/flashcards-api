@@ -15,21 +15,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cognixia.jump.model.User;
 import com.cognixia.jump.repository.UserRepository;
+import com.cognixia.jump.service.UserService;
 
-@RequestMapping("/api")
 @RestController
+@RequestMapping("/api")
 public class UserController {
 
 	@Autowired
 	UserRepository repo;
-	
+	@Autowired
+	UserService service;
 
 	@Autowired
 	PasswordEncoder encoder;
 
 	@GetMapping("/user")
 	public List<User> getAllUsers() {
-		return repo.findAll();
+		return service.getUsers();
 	}
 
 	@GetMapping("/user/{id}")

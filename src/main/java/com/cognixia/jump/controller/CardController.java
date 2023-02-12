@@ -42,7 +42,7 @@ public class CardController {
 	StackRepository srepo;
 
 	@GetMapping("/card/{stack_id}")
-	public ResponseEntity<?> getStacksByStackId(@PathVariable int stack_id) throws ResourceNotFoundException {
+	public ResponseEntity<?> getCardsByStackId(@PathVariable int stack_id) throws ResourceNotFoundException {
 
 		Stack stack = srepo.findById(stack_id).get();
 

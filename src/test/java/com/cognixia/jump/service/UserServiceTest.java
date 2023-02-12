@@ -1,11 +1,11 @@
 package com.cognixia.jump.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -25,6 +25,7 @@ public class UserServiceTest {
 	@InjectMocks
 	private UserService service;
 	
+	@Test
 	void testGetUserById() throws Exception{
 		
 		int id = 1;
@@ -36,13 +37,10 @@ public class UserServiceTest {
 		
 		when(repo.findById(id) ).thenReturn(Optional.of(user));
 		
-		User result = service.getUserById(id).get();
+		User result = service.getUserById(id);
 		
 		
 		assertEquals(user, result);
-		
-		
-		
 		
 		
 		

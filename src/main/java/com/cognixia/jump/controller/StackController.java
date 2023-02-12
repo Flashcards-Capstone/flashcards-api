@@ -73,22 +73,23 @@ public class StackController {
 	public ResponseEntity<?> newStack(@RequestParam(value = "user_id", required = true) String user_id,
 			@RequestBody Stack stack) throws ResourceNotFoundException {
 
-		User user = new User();
+	//	User user = new User();
 
-		Optional<User> optionalUser = us.getUserById(Integer.parseInt(user_id));
+		//Optional<User> optionalUser = us.getUserById(Integer.parseInt(user_id));
+		User user1 = us.getUserById(Integer.parseInt(user_id));
 
-		if (optionalUser.isPresent()) {
-			user = optionalUser.get();
-		} else {
-			throw new ResourceNotFoundException("user", Integer.parseInt(user_id));
-		}
-		stack.setUser(user);
+//		if (user.isPresent()) {
+//			user = optionalUser.get();
+//		} else {
+//			throw new ResourceNotFoundException("user", Integer.parseInt(user_id));
+//		}
+		stack.setUser(user1);
 
 		Stack created = repo.save(stack);
 
-		user.getStacks().add(created);
+		user1.getStacks().add(created);
 
-		urepo.save(user);
+		urepo.save(user1);
 
 		return ResponseEntity.status(201).body(created);
 
@@ -115,9 +116,11 @@ public class StackController {
 		Stack stack = repo.findById(id).get();
 
 
-		Stack created = repo.save(stack);
-
-		return ResponseEntity.status(200).body(created);
+		//Stack created = repo.save(stack);
+		repo.save(stack);
+		
+		
+		return ResponseEntity.status(200).body("Stack Updated");
 
 	}
 
