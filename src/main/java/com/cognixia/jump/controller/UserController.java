@@ -1,5 +1,6 @@
 package com.cognixia.jump.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cognixia.jump.exception.ResourceNotFoundException;
 import com.cognixia.jump.model.User;
 import com.cognixia.jump.repository.UserRepository;
 import com.cognixia.jump.service.UserService;
@@ -30,11 +32,14 @@ public class UserController {
 	PasswordEncoder encoder;
 	
 	@GetMapping("/login")
-	public ResponseEntity<?> getUserByUsernameAndPassword(@RequestBody User user){
-		return null;
+	public ResponseEntity<?> getUserByUsernameAndPassword(@RequestBody HashMap<String, String> test) throws ResourceNotFoundException{
+		String username = test.get("username");
+		String password = test.get("password");
 		
 		
+		User user = service.getUserByUsernameAndPassword(username, password);
 		
+		return ResponseEntity.status(200).body(user);
 	}
 
 	@GetMapping("/user")
