@@ -139,14 +139,13 @@ public class UserControllerTest {
 		when(service.getUserById(id)).thenReturn(user);
 
 		
-		
 		mvc.perform(get(uri, id)) // perform get request
 				.andDo(print()) // print request sent/response given
 				.andExpect(status().isOk()) // expect a 200 status code
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE)) // checks content type is json
 				.andExpect(jsonPath("$.id").value(user.getId())) // check each column value for the
-				.andExpect(jsonPath("$.firstName").value(user.getUsername()))
-				.andExpect(jsonPath("$.lastName").value(user.getPassword()))
+				.andExpect(jsonPath("$.username").value(user.getUsername()))
+				.andExpect(jsonPath("$.password").value(user.getPassword()))
 				.andExpect(jsonPath("$.email").value(user.getEmail()))
 				.andExpect(jsonPath("$.role").value(user.getRole())); // string value, won't
 
