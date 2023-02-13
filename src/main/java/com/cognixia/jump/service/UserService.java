@@ -37,9 +37,7 @@ public class UserService {
 		return found.get();
 	}
 	
-	public User getUserByUsernameAndPassword(User user)throws ResourceNotFoundException {
-		String username = user.getUsername();
-		String password = user.getPassword();
+	public User getUserByUsernameAndPassword(String username, String password)throws ResourceNotFoundException {
 		
 		Optional<User> logUser = repo.loggedInUser(username, password);
 		
