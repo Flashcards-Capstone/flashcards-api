@@ -15,53 +15,42 @@ import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
-	
+
 @Entity
-public class User  implements Serializable{
+public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	public static enum Role {
 		ROLE_STUDENT, ROLE_TEACHER
 	}
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	//@Column(nullable = false)
+
+	// @Column(nullable = false)
 	@NotBlank
 	private String username;
-	
-	//@Column(nullable = false)
+
+	// @Column(nullable = false)
 	@NotBlank
 	private String password;
-	
-	//@Column(nullable = false)
+
+	// @Column(nullable = false)
 	@NotBlank
 	private String email;
-	
+
 	@Enumerated(EnumType.STRING)
 	private Role role;
-	
+
 //	@JsonProperty(access = Access.WRITE_ONLY)
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Stack> stacks;
+	private List<Stack> stacks;
 
 	public User() {
-		
+
 	}
-//	public User() {
-//		this(-1, "N/A", "N/A","N/A","N/A");
-//	}
-//	
-//	public User(Integer id, String username, String password, String email, String role) {
-//		super();
-//		this.id = id;
-//		this.username = username;
-//		this.password = password;
-//		this.email = email;
-//	}
 
 	public Integer getId() {
 		return id;
@@ -102,22 +91,21 @@ public class User  implements Serializable{
 	public void setRole(Role role) {
 		this.role = role;
 	}
-	
-	public List<Stack> getStacks(){
+
+	public List<Stack> getStacks() {
 		return stacks;
 	}
-	
+
 	public void setStacks(List<Stack> stacks) {
 		this.stacks = stacks;
 	}
-	
-	
+
 	public void setNewStacks() {
-		for(Stack s : stacks) {
-			
+		for (Stack s : stacks) {
+
 			s.setId(null);
 			s.setUser(this);
-			
+
 		}
 	}
 
@@ -126,7 +114,5 @@ public class User  implements Serializable{
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", role="
 				+ role + ", stacks=" + stacks + "]";
 	}
-	
-
 
 }

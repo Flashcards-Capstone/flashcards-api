@@ -1,5 +1,6 @@
 package com.cognixia.jump.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,9 @@ public class StackService {
 	@Autowired
 	StackRepository repo;
 	
+	public List<Stack> getStacks(){
+		return repo.findAll();
+	} 
 	
 	public Optional<Stack> getStackById(int id){
 		

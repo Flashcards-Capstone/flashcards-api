@@ -39,13 +39,15 @@ public class SecurityConfiguration {
 		http.csrf().disable()
 			.authorizeRequests()
 			.antMatchers("/authenticate").permitAll()
-			//.antMatchers("/api/user").permitAll()
 			.antMatchers("/api/user").permitAll()
-			.antMatchers("/api/stack").hasRole("TEACHER")
+			.antMatchers("/api/user/{id}").permitAll()
+			//.antMatchers("/api/stack").hasRole("TEACHER")
 			.antMatchers("/api/stack").permitAll()
+			.antMatchers("/api/stack/{id}").permitAll()
 			.antMatchers("/api/stack/stack_id").permitAll()
-			.antMatchers("/api/stack/subject").permitAll()
+			.antMatchers("/api/stack/subject/{subject}").permitAll()
 			.antMatchers("/api/card").permitAll()
+			.antMatchers("/api/card/{id}").permitAll()
 			.antMatchers("/api/card/card_id").permitAll()
 
 			.anyRequest().authenticated() // if not specified, all other end points need a user login
@@ -65,8 +67,6 @@ public class SecurityConfiguration {
 	@Bean
 	protected PasswordEncoder encoder() {
 		
-		// plain text encoder -> won't do any encoding
-		// return NoOpPasswordEncoder.getInstance();
 		
 		// there's many options for password encoding, just pick a algorithm that you like
 			return new BCryptPasswordEncoder(); 
