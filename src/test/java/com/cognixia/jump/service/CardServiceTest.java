@@ -49,7 +49,7 @@ public class CardServiceTest {
 		card.setQuestion("Question");
 		card.setAnswer("answer");
 		
-		when(service.updateQuestion(id, question));
+		when(repo.updateQuestion(id, question)).thenReturn(1);
 		when(repo.findById(id)).thenReturn(Optional.of(card));
 		
 		Card updated = service.updateQuestion(id, question).get();
@@ -65,7 +65,7 @@ public class CardServiceTest {
 		card.setQuestion("Question");
 		card.setAnswer("answer");
 		
-		when(service.updateAnswer(id, answer));
+		when(repo.updateAnswer(id, answer)).thenReturn(1);
 		when(repo.findById(id)).thenReturn(Optional.of(card));
 		
 		Card updated = service.updateAnswer(id, answer).get();

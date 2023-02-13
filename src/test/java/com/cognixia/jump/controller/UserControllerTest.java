@@ -135,13 +135,11 @@ public class UserControllerTest {
 
 
 		System.out.println(user);
-		if(user.getId() == id) {
-			when(service.getUserById(id)).thenReturn(user);
+		
+		when(service.getUserById(id)).thenReturn(user);
 
-		}
-		else {
-			System.out.println("WENT WRONG HERE");
-		}
+		
+		
 		mvc.perform(get(uri, id)) // perform get request
 				.andDo(print()) // print request sent/response given
 				.andExpect(status().isOk()) // expect a 200 status code
