@@ -61,6 +61,18 @@ public class StackController {
 
 		return ResponseEntity.status(200).body(found.get());
 	}
+	
+	@GetMapping("/stack/{user_id}")
+	public ResponseEntity<?> getCardsByStackId(@PathVariable int user_id) throws ResourceNotFoundException {
+
+		User user = urepo.findById(user_id).get();
+		
+		List<Stack> stack = user.getStacks();
+		
+		return ResponseEntity.status(200).body(stack);
+		
+		
+	}
 
 
 	@GetMapping("/stack/subject/{subject}")

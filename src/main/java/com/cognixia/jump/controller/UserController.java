@@ -28,6 +28,14 @@ public class UserController {
 
 	@Autowired
 	PasswordEncoder encoder;
+	
+	@GetMapping("/login")
+	public ResponseEntity<?> getUserByUsernameAndPassword(@RequestBody User user){
+		return null;
+		
+		
+		
+	}
 
 	@GetMapping("/user")
 	public List<User> getAllUsers() {
@@ -46,6 +54,8 @@ public class UserController {
 		}
 	}
 
+
+	
 	@PostMapping("/user")
 	public ResponseEntity<?> createUser(@RequestBody User user) {
 
