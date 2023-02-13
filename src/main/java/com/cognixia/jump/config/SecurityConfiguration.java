@@ -40,6 +40,8 @@ public class SecurityConfiguration {
 			.authorizeRequests()
 			.antMatchers("/authenticate").permitAll()
 			.antMatchers("/api/user").permitAll()
+			.antMatchers("/api/login").permitAll()
+			.antMatchers("/api/login/{username}").permitAll()
 			.antMatchers("/api/user/{id}").permitAll()
 			//.antMatchers("/api/stack").hasRole("TEACHER")
 			.antMatchers("/api/stack").permitAll()

@@ -31,7 +31,7 @@ public class UserService {
 		Optional<User> found = repo.findById(id);
 		
 		if(found.isEmpty()) {
-			throw new ResourceNotFoundException("User", id);
+			System.out.println("Hey dummy we cant find the user");
 		}
 		
 		return found.get();
@@ -39,15 +39,15 @@ public class UserService {
 	
 	public User getUserByUsernameAndPassword(String username, String password)throws ResourceNotFoundException {
 		
-		Optional<User> logUser = repo.loggedInUser(username, password);
+		Integer id = repo.loggedInUser(username, password);
 		
-		if(logUser.isEmpty()) {
+		if(id == null) {
 			throw new ResourceNotFoundException("Username", 1);
 		}
 		
+		Optional<User> user = repo.findById(id);
 		
-		
-		return logUser.get();
+		return user.get();
 		
 		
 	}
