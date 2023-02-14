@@ -34,7 +34,11 @@ public class UserController {
 	@GetMapping("/login/{username}")
 	public ResponseEntity<?> getUserByUsername(@PathVariable String username) throws ResourceNotFoundException{
 		Optional<User> user = repo.findByUsername(username);
+
 		
+		//User user = service.getUserByUsernameAndPassword(username, password);
+		User user = service.getUserByUsernameAndPassword(username);
+
 		return ResponseEntity.status(200).body(user);
 	}
 
@@ -62,8 +66,10 @@ public class UserController {
 
 		user.setId(null);
 
-		user.setPassword(encoder.encode(user.getPassword()));
+		//user.setPassword(encoder.encode(user.getPassword()));
 		
+		user.setPassword(encoder.encode(user.getPassword()));
+
 		//user.setNewStacks(); 
 
 		User created = repo.save(user);

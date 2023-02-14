@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.cognixia.jump.exception.ResourceNotFoundException;
@@ -14,6 +15,8 @@ import com.cognixia.jump.repository.UserRepository;
 public class UserService {
 	@Autowired
 	UserRepository repo;
+	
+
 	
 	public List<User> getUsers(){
 		return repo.findAll();
@@ -37,12 +40,14 @@ public class UserService {
 		return found.get();
 	}
 	
-	public User getUserByUsernameAndPassword(String username, String password)throws ResourceNotFoundException {
-		
-		Integer id = repo.loggedInUser(username, password);
-		
+	//public User getUserByUsernameAndPassword(String username, String password) {
+		public User getUserByUsernameAndPassword(String username) {
+
+		//Integer id = repo.loggedInUser(username, password);
+		Integer id = repo.loggedInUser(username);
+
 		if(id == null) {
-			throw new ResourceNotFoundException("Username", 1);
+			System.out.println("ID is NULL");
 		}
 		
 		Optional<User> user = repo.findById(id);

@@ -51,8 +51,8 @@ public class CardController {
 		return ResponseEntity.status(200).body(cards);
 	}
 
-	@PostMapping("/card")
-	public ResponseEntity<?> createCard(@RequestParam(value = "stack_id", required = true) String stack_id,
+	@PostMapping("/card/{stack_id}")
+	public ResponseEntity<?> createCard(@PathVariable String stack_id,
 			@RequestBody Card card) throws ResourceNotFoundException {
 
 		// card.setId(null);

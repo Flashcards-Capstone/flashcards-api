@@ -10,9 +10,10 @@
 	</parent>
 	<groupId>com.cognixia.jump</groupId>
 	<artifactId>flashcardapp</artifactId>
-	<version>v1</version>
+	<version>v4</version>
 	<name>FlashcardApp</name>
 	<description>A Flashcard Application</description>
+	<packaging>jar</packaging>
 	<properties>
 		<java.version>19</java.version>
 	</properties>

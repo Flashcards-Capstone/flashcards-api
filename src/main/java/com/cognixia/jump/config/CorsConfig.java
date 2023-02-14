@@ -8,6 +8,8 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 // CORS -> policy or set of rules about which clients can consume APIs from this service
 
 @Configuration
@@ -23,19 +25,12 @@ public class CorsConfig implements WebMvcConfigurer {
 		
 	}
 	
+
+
+
+
 	
-
+	
 }
-
-//@EnableWebMvc
-//public class WebSecurityConfig{
-//	
-//	@Bean
-//	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-//		http.cors().and();
-//	}
-//	
-//	
-//}
 
 
