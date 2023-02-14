@@ -32,8 +32,15 @@ public class UserController {
 	PasswordEncoder encoder;
 	
 	@GetMapping("/login/{username}")
+<<<<<<< HEAD
+	//public ResponseEntity<?> getUserByUsernameAndPassword(@PathVariable String username, String password) throws ResourceNotFoundException{
+//		String username = test.get("username");
+		//String encodedPassword = encoder.encode(password);
+		public ResponseEntity<?> getUserByUsername(@PathVariable String username) throws ResourceNotFoundException{
+=======
 	public ResponseEntity<?> getUserByUsername(@PathVariable String username) throws ResourceNotFoundException{
 		Optional<User> user = repo.findByUsername(username);
+>>>>>>> 74276aa6634846f6c6c68c3b28ddd0892352c1e9
 
 		
 		//User user = service.getUserByUsernameAndPassword(username, password);
