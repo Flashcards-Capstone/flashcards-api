@@ -26,9 +26,4 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	//public Integer loggedInUser(String username, String password);
 	public Integer loggedInUser(String username);
 
-	
-	//public User findById(Integer user_id);
-
-
-
 }

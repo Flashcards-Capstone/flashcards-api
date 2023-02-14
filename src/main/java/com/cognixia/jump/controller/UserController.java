@@ -1,8 +1,8 @@
 package com.cognixia.jump.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,12 +32,9 @@ public class UserController {
 	PasswordEncoder encoder;
 	
 	@GetMapping("/login/{username}")
-	//public ResponseEntity<?> getUserByUsernameAndPassword(@PathVariable String username, String password) throws ResourceNotFoundException{
-//		String username = test.get("username");
-		//String encodedPassword = encoder.encode(password);
-		public ResponseEntity<?> getUserByUsernameAndPassword(@PathVariable String username) throws ResourceNotFoundException{
+	public ResponseEntity<?> getUserByUsername(@PathVariable String username) throws ResourceNotFoundException{
+		Optional<User> user = repo.findByUsername(username);
 
-		
 		
 		//User user = service.getUserByUsernameAndPassword(username, password);
 		User user = service.getUserByUsernameAndPassword(username);
