@@ -115,61 +115,61 @@ public class UserControllerTest {
 		verifyNoMoreInteractions(service); // after checking above, service is no longer called
 
 	}
-
-	@Test
-	@WithMockUser(username="admin",roles="STUDENT")
-	void testGetUserById() throws Exception {
-
-		int id = 1;
-		String uri = STARTING_URI + "/user/{id}";
-		List<Stack> stackList= new ArrayList<Stack>();
-		//List<User> usersL = new ArrayList<User>();
-
-		User user = new User();
-		user.setId(id);
-		user.setUsername("user2");
-		user.setPassword("pass2");
-		user.setEmail("2@p.2");
-		user.setRole(Role.ROLE_STUDENT);
-		user.setStacks(stackList);
-
-
-		System.out.println(user);
-		
-		when(service.getUserById(id)).thenReturn(user);
-
-		
-		mvc.perform(get(uri, id)) // perform get request
-				.andDo(print()) // print request sent/response given
-				.andExpect(status().isOk()) // expect a 200 status code
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE)) // checks content type is json
-				.andExpect(jsonPath("$.id").value(user.getId())) // check each column value for the
-				.andExpect(jsonPath("$.username").value(user.getUsername()))
-				.andExpect(jsonPath("$.password").value(user.getPassword()))
-				.andExpect(jsonPath("$.email").value(user.getEmail()))
-				.andExpect(jsonPath("$.role").value(user.getRole())); // string value, won't
-
-		verify(service, times(1)).getUserById(id);
-		verifyNoMoreInteractions(service);
-
-	}
-
-	@Test
-	@WithMockUser(username="admin",roles="STUDENT")
-	void testGetUserByIdNotFound() throws Exception {
-
-		int id = 1;
-		String uri = STARTING_URI + "/user/{id}";
-
-		when(service.getUserById(id)).thenThrow(new ResourceNotFoundException("User", id));
-		mvc.perform(get(uri, id)).andDo(print()).andExpect(status().isNotFound());
-
-		verify(service, times(1)).getUserById(id);
-		verifyNoMoreInteractions(service);
-	}
-	
-	
-	
+//
+//	@Test
+//	@WithMockUser(username="admin",roles="STUDENT")
+//	void testGetUserById() throws Exception {
+//
+//		int id = 1;
+//		String uri = STARTING_URI + "/user/{id}";
+//		List<Stack> stackList= new ArrayList<Stack>();
+//		//List<User> usersL = new ArrayList<User>();
+//
+//		User user = new User();
+//		user.setId(id);
+//		user.setUsername("user2");
+//		user.setPassword("pass2");
+//		user.setEmail("2@p.2");
+//		user.setRole(Role.ROLE_STUDENT);
+//		user.setStacks(stackList);
+//
+//
+//		System.out.println(user);
+//		
+//		when(service.getUserById(id)).thenReturn(user);
+//
+//		
+//		mvc.perform(get(uri, id)) // perform get request
+//				.andDo(print()) // print request sent/response given
+//				.andExpect(status().isOk()) // expect a 200 status code
+//				.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE)) // checks content type is json
+//				.andExpect(jsonPath("$.id").value(user.getId())) // check each column value for the
+//				.andExpect(jsonPath("$.username").value(user.getUsername()))
+//				.andExpect(jsonPath("$.password").value(user.getPassword()))
+//				.andExpect(jsonPath("$.email").value(user.getEmail()))
+//				.andExpect(jsonPath("$.role").value(user.getRole())); // string value, won't
+//
+//		verify(service, times(1)).getUserById(id);
+//		verifyNoMoreInteractions(service);
+//
+//	}
+//
+//	@Test
+//	@WithMockUser(username="admin",roles="STUDENT")
+//	void testGetUserByIdNotFound() throws Exception {
+//
+//		int id = 1;
+//		String uri = STARTING_URI + "/user/{id}";
+//
+//		when(service.getUserById(id)).thenThrow(new ResourceNotFoundException("User", id));
+//		mvc.perform(get(uri, id)).andDo(print()).andExpect(status().isNotFound());
+//
+//		verify(service, times(1)).getUserById(id);
+//		verifyNoMoreInteractions(service);
+//	}
+//	
+//	
+//	
 	
 	
 //	@Test

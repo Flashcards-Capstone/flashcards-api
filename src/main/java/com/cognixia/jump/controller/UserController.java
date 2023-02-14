@@ -31,14 +31,17 @@ public class UserController {
 	@Autowired
 	PasswordEncoder encoder;
 	
-	@GetMapping("/login")
-	public ResponseEntity<?> getUserByUsernameAndPassword(@RequestBody HashMap<String, String> test) throws ResourceNotFoundException{
-		String username = test.get("username");
-		String password = test.get("password");
+	@GetMapping("/login/{username}")
+	//public ResponseEntity<?> getUserByUsernameAndPassword(@PathVariable String username, String password) throws ResourceNotFoundException{
+//		String username = test.get("username");
+		//String encodedPassword = encoder.encode(password);
+		public ResponseEntity<?> getUserByUsernameAndPassword(@PathVariable String username) throws ResourceNotFoundException{
+
 		
 		
-		User user = service.getUserByUsernameAndPassword(username, password);
-		
+		//User user = service.getUserByUsernameAndPassword(username, password);
+		User user = service.getUserByUsernameAndPassword(username);
+
 		return ResponseEntity.status(200).body(user);
 	}
 
@@ -66,8 +69,10 @@ public class UserController {
 
 		user.setId(null);
 
-		user.setPassword(encoder.encode(user.getPassword()));
+		//user.setPassword(encoder.encode(user.getPassword()));
 		
+		user.setPassword(encoder.encode(user.getPassword()));
+
 		//user.setNewStacks(); 
 
 		User created = repo.save(user);

@@ -47,6 +47,10 @@ public class SecurityConfiguration {
 			.antMatchers("/api/stack/stack_id").permitAll()
 			.antMatchers("/api/stack/subject/{subject}").permitAll()
 			.antMatchers("/api/card").permitAll()
+			.antMatchers("/api/login/{username}/{password}").permitAll()
+			.antMatchers("/api/login/{username}").permitAll()
+			.antMatchers("/api/card/{stack_id}").permitAll()
+
 			.antMatchers("/api/card/{id}").permitAll()
 			.antMatchers("/api/card/card_id").permitAll()
 
@@ -54,11 +58,9 @@ public class SecurityConfiguration {
 			.and()
 			.sessionManagement().sessionCreationPolicy( SessionCreationPolicy.STATELESS ); // tell spring security to NOT CREATE sessions;
 		
-		// this request will go through many filters, make sure that the FIRST filter that is checked is
-		// the filter for jwts, in order to make sure of that, the filter has to be checked before you check the 
-		// username & password (filter)
+
 		http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-		
+		http.cors();
 			
 		return http.build();
 	}
