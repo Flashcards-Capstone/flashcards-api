@@ -44,12 +44,18 @@ public class SecurityConfiguration {
 
 			.antMatchers("/swagger-ui/index.html").permitAll()
 			.antMatchers("/api/user").permitAll()
+			.antMatchers("/api/login").permitAll()
+			.antMatchers("/api/login/{username}").permitAll()
 			.antMatchers("/api/user/{id}").permitAll()
 			//.antMatchers("/api/stack").hasRole("TEACHER")
 			.antMatchers("/api/stack").permitAll()
 			.antMatchers("/api/stack/{id}").permitAll()
+<<<<<<< HEAD
 			.antMatchers("/api/stack/user/{user_id}").permitAll()
 
+=======
+			.antMatchers("/api/stack/user/{id}").permitAll()
+>>>>>>> 74276aa6634846f6c6c68c3b28ddd0892352c1e9
 			.antMatchers("/api/stack/stack_id").permitAll()
 			.antMatchers("/api/stack/subject/{subject}").permitAll()
 			.antMatchers("/api/card").permitAll()
