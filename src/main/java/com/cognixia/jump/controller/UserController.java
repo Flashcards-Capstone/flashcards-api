@@ -35,7 +35,7 @@ public class UserController {
 	//public ResponseEntity<?> getUserByUsernameAndPassword(@PathVariable String username, String password) throws ResourceNotFoundException{
 //		String username = test.get("username");
 		//String encodedPassword = encoder.encode(password);
-		public ResponseEntity<?> getUserByUsernameAndPassword(@PathVariable String username) throws ResourceNotFoundException{
+		public ResponseEntity<?> getUserByUsername(@PathVariable String username) throws ResourceNotFoundException{
 
 		
 		
