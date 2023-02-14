@@ -46,6 +46,7 @@ public class SecurityConfiguration {
 			//.antMatchers("/api/stack").hasRole("TEACHER")
 			.antMatchers("/api/stack").permitAll()
 			.antMatchers("/api/stack/{id}").permitAll()
+			.antMatchers("/api/stack/user/{id}").permitAll()
 			.antMatchers("/api/stack/stack_id").permitAll()
 			.antMatchers("/api/stack/subject/{subject}").permitAll()
 			.antMatchers("/api/card").permitAll()
